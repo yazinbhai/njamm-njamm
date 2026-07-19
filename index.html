@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Njamm Njamm | Premium Kerala Banana Chips</title>
+  <meta name="description" content="One Flavor. Perfected. The luxury single-page showcase of authentic Kerala banana chips.">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              light: '#F3E5AB',
+              DEFAULT: '#D4AF37',
+              dark: '#AA7C11',
+            },
+            charcoal: '#0C0C0C',
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Local Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-black text-white selection:bg-gold selection:text-black custom-cursor-active overflow-x-hidden">
+
+  <!-- Noise Overlay for Cinematic Texture -->
+  <div class="noise-overlay"></div>
+
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor pointer-events-none fixed top-0 left-0 hidden md:block"></div>
+  <div class="custom-cursor-ring pointer-events-none fixed top-0 left-0 hidden md:block"></div>
+
+
+
+  <!-- Sticky Header Navigation -->
+  <header class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-white/5 py-4 px-6 md:px-12 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="#hero" class="relative block h-10 w-18 group">
+        <img src="assets/Logo.png" alt="Njamm Njamm Logo" class="absolute left-0 top-1/2 -translate-y-1/2 w-auto max-w-none object-contain rounded-md glow-gold transition-transform duration-300 group-hover:scale-105 origin-left" style="height: 70px;">
+      </a>
+      
+      <nav class="hidden md:flex items-center gap-8 text-[11px] uppercase tracking-widest font-semibold text-white/70">
+        <a href="#hero" class="hover:text-gold transition-colors duration-200">Reveal</a>
+        <a href="#anatomy" class="hover:text-gold transition-colors duration-200">Anatomy</a>
+        <a href="#precision" class="hover:text-gold transition-colors duration-200">Precision</a>
+        <a href="#liquid-gold" class="hover:text-gold transition-colors duration-200">Liquid Gold</a>
+        <a href="#final-touch" class="hover:text-gold transition-colors duration-200">Touch</a>
+        <a href="#cta" class="hover:text-gold transition-colors duration-200">Order</a>
+      </nav>
+
+      <div>
+        <a href="#cta" class="magnetic-btn cta-button-glow px-5 py-2.5 rounded-full font-display font-black tracking-widest text-[10px] uppercase transition-all duration-300">
+          Reserve Box
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Section 1: Hero Reveal -->
+    <section id="hero" class="min-h-screen relative flex items-center justify-center pt-20 overflow-hidden bg-black">
+      <!-- Background Video Overlay -->
+      <div class="absolute inset-0 z-0 bg-black">
+        <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-20 mix-blend-lighten filter brightness-50">
+          <source src="assets/Njamm_Njamm_packet_reveal.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-6 text-center flex flex-col items-center">
+        <!-- Headline and Subheadline (Hidden initially with opacity-0) -->
+        <h1 class="font-display font-black text-6xl md:text-9xl tracking-tight leading-none text-gold-gradient glow-gold opacity-0 translate-y-10 hero-reveal-element mb-2">
+          Njamm Njamm
+        </h1>
+        <p class="font-display font-light text-xl md:text-3xl tracking-widest text-white/70 uppercase opacity-0 translate-y-10 hero-reveal-element mb-8">
+          ITS YOUR TURN, TASTE IT
+        </p>
+
+        <!-- Pinned Product Showcase Container -->
+        <div class="relative w-80 h-80 md:w-[450px] md:h-[450px] opacity-0 scale-90 hero-reveal-scale flex items-center justify-center my-4">
+          <div class="absolute w-72 h-72 md:w-96 md:h-96 rounded-full bg-gold/10 blur-[120px] -z-10"></div>
+          <img src="assets/Njam%20Njam%20Packet.png" alt="Njamm Njamm Premium Bag Packaging" class="w-full h-full object-contain filter drop-shadow-[0_20px_60px_rgba(212,175,55,0.45)] hover:scale-105 transition-transform duration-500">
+        </div>
+
+        <div class="opacity-0 translate-y-10 hero-reveal-element mt-4">
+          <a href="#anatomy" class="inline-flex items-center gap-2 text-gold hover:text-white transition-colors duration-300 font-semibold tracking-wider text-xs uppercase">
+            Scroll to begin
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5 animate-bounce">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator">
+        <div class="scroll-indicator-wheel">
+          <div class="scroll-indicator-dot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Anatomy of a Chip -->
+    <section id="anatomy" class="min-h-screen relative flex items-center justify-center bg-black py-20 overflow-hidden">
+      <!-- Centered Structural Layout -->
+      <div class="max-w-4xl mx-auto px-6 text-center space-y-8 relative z-10 flex flex-col items-center">
+        <!-- Headline and Copy (Hidden initially with opacity-0) -->
+        <span class="text-gold font-display font-semibold uppercase tracking-[0.2em] text-xs opacity-0 translate-y-10 anatomy-element">Chapter 01: Ingredients</span>
+        
+        <h2 class="font-display font-black text-4xl md:text-7xl tracking-tight leading-tight text-white opacity-0 translate-y-10 anatomy-element">
+          Three Ingredients.<br>
+          <span class="text-gold-gradient glow-gold">Zero Compromises.</span>
+        </h2>
+        
+        <p class="max-w-2xl text-white/70 font-light text-base md:text-xl leading-relaxed opacity-0 translate-y-10 anatomy-element">
+          No artificial flavors. No complex sourcing games. Just flawless Kerala bananas, pure coconut oil, and pristine sea salt.
+        </p>
+
+        <!-- Centered Structural Media Element -->
+        <div class="relative w-full max-w-2xl aspect-[16/9] rounded-2xl overflow-hidden bg-charcoal/40 backdrop-blur-md p-2 shadow-2xl opacity-0 scale-95 anatomy-scale my-6">
+          <img src="assets/Ingredients.jpeg" alt="Three Simple Organic Ingredients: Nendran Banana, Sea Salt, Coconut Oil" class="w-full h-full object-cover rounded-xl filter brightness-75 hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Precision Cut -->
+    <section id="precision" class="min-h-screen relative flex items-center bg-black py-20 overflow-hidden border-t border-white/5">
+      <!-- Dual-column layout emphasizing macro views -->
+      <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <!-- Left: Headline and Copy (Hidden initially with opacity-0) -->
+        <div class="space-y-6 lg:max-w-xl">
+          <span class="text-gold font-display font-semibold uppercase tracking-[0.2em] text-xs opacity-0 translate-y-10 precision-element">Chapter 02: Thickness</span>
+          
+          <h2 class="font-display font-black text-4xl md:text-6xl tracking-tight leading-none text-white opacity-0 translate-y-10 precision-element">
+            Precision Cut.
+          </h2>
+          
+          <p class="text-white/70 font-light text-base md:text-lg leading-relaxed opacity-0 translate-y-10 precision-element">
+            Every slice is calibrated for the ultimate crunch. Light enough to melt, crisp enough to snap.
+          </p>
+        </div>
+
+        <!-- Right: Macro View Image (Multi-layered Parallax Elements) -->
+        <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-charcoal/40 backdrop-blur-md p-4 shadow-2xl opacity-0 scale-95 precision-scale flex items-center justify-center">
+          <!-- Background Layer (Moves slower) -->
+          <div class="absolute w-[85%] h-[85%] rounded-full bg-gold/5 blur-[30px] border border-gold/10 precision-bg-layer pointer-events-none"></div>
+          
+          <!-- Midground Layer (The Chip image, standard speed) -->
+          <div class="relative w-[75%] h-[75%] rounded-full overflow-hidden shadow-[0_0_40px_rgba(212,175,55,0.2)] precision-mid-layer z-10">
+            <img src="assets/Banana_slices_suspended_in_air.jpeg" alt="Macro close-up of a 1.2mm thin Kerala banana chip slice suspended in air" class="w-full h-full object-cover filter brightness-110 hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-transparent pointer-events-none"></div>
+          </div>
+          
+          <!-- Foreground Layer (Moves faster) -->
+          <div class="absolute w-[95%] h-[95%] border border-gold/20 rounded-full precision-fg-layer pointer-events-none z-20 flex items-center justify-center">
+            <!-- Small floating highlights/bubbles in foreground -->
+            <div class="absolute top-[12%] left-[22%] w-5 h-5 rounded-full bg-gold/30 blur-sm animate-pulse"></div>
+            <div class="absolute bottom-[16%] right-[24%] w-7 h-7 rounded-full bg-gold/15 blur-[2px]"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Liquid Gold -->
+    <section id="liquid-gold" class="min-h-screen relative flex items-center justify-center bg-black overflow-hidden border-t border-white/5">
+      <!-- Full-viewport vertical container -->
+      <div class="absolute inset-0 z-0 opacity-20 filter grayscale brightness-50 contrast-125">
+        <img src="assets/Coconut_oil_flowing_through_space.jpeg" alt="Gold cold-pressed coconut oil flowing through space" class="w-full h-full object-cover scale-110 liquid-gold-bg">
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-0"></div>
+
+      <div class="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-6 flex flex-col items-center">
+        <!-- Headline and Copy (Hidden initially with opacity-0) -->
+        <span class="text-gold font-display font-semibold uppercase tracking-[0.2em] text-xs opacity-0 translate-y-10 liquid-gold-element">Chapter 03: Medium</span>
+        
+        <h2 class="font-display font-black text-4xl md:text-7xl tracking-tight leading-tight text-white opacity-0 translate-y-10 liquid-gold-element">
+          Bathed in 100%<br>
+          <span class="text-gold-gradient glow-gold">Pure Coconut Oil.</span>
+        </h2>
+        
+        <p class="max-w-2xl text-white/80 font-light text-base md:text-lg leading-relaxed opacity-0 translate-y-10 liquid-gold-element">
+          Not generic vegetable blends. We use unadulterated coconut oil to deliver that unmistakable, authentic aroma of a true Keralite home.
+        </p>
+
+
+      </div>
+    </section>
+
+    <!-- Section 5: The Final Touch -->
+    <section id="final-touch" class="min-h-screen relative flex items-center bg-black py-20 overflow-hidden border-t border-white/5">
+      <!-- Dynamic text overlays on deep black grids -->
+      <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Left Column: Grid representation of seasoning -->
+        <div class="lg:col-span-7 relative aspect-[4/3] rounded-2xl overflow-hidden bg-charcoal/40 backdrop-blur-md p-2 shadow-2xl opacity-0 scale-95 final-touch-scale">
+          <img src="assets/Salting%20banana%20chips.jpeg" alt="Fine sea salt crystals being dusted and showered over freshly fried golden banana chips" class="w-full h-full object-cover rounded-xl filter brightness-90 hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none"></div>
+        </div>
+
+        <!-- Right Column: Text content overlaying deep black -->
+        <div class="lg:col-span-5 space-y-6 lg:pl-6">
+          <span class="text-gold font-display font-semibold uppercase tracking-[0.2em] text-xs opacity-0 translate-y-10 final-touch-element">Chapter 04: Seasoning</span>
+          
+          <h2 class="font-display font-black text-4xl md:text-6xl tracking-tight leading-tight text-white opacity-0 translate-y-10 final-touch-element">
+            A Whisper of<br>
+            <span class="text-gold-gradient glow-gold">Sea Salt.</span>
+          </h2>
+          
+          <p class="text-white/70 font-light text-base md:text-lg leading-relaxed opacity-0 translate-y-10 final-touch-element">
+            Just enough to elevate the taste, Nothing more.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Call to Action -->
+    <section id="cta" class="min-h-screen relative flex items-center justify-center bg-black overflow-hidden border-t border-white/5">
+      <!-- Ambient light glowing ring in back -->
+      <div class="absolute w-96 h-96 rounded-full bg-gold/5 blur-[120px] -z-10"></div>
+
+      <div class="max-w-4xl mx-auto px-6 text-center space-y-8 relative z-10 flex flex-col items-center">
+        <!-- Logo branding -->
+        <img src="assets/Logo.png" alt="Njamm Njamm Logo" class="h-28 md:h-36 w-auto object-contain rounded-md glow-gold opacity-0 scale-95 cta-scale mb-2">
+
+        <!-- Headline (Hidden initially with opacity-0) -->
+        <h2 class="font-display font-black text-5xl md:text-8xl tracking-tight leading-none text-white opacity-0 translate-y-10 cta-element">
+          It's Your Turn.<br>
+          <span class="text-gold-gradient glow-gold">Taste It.</span>
+        </h2>
+        
+        <!-- Subscription CTA form/button -->
+        <p class="text-white/50 text-base md:text-xl font-light max-w-xl mx-auto opacity-0 translate-y-10 cta-element">
+          Secure your box of wood-fired Kerala banana chips. Shipped fresh, directly from our hearth.
+        </p>
+
+        <div class="pt-6 opacity-0 translate-y-10 cta-element w-full max-w-xs mx-auto">
+          <!-- WhatsApp Order Link -->
+          <a href="https://wa.me/910000000000?text=Hi!%20I%20would%20like%20to%20order%20a%20box%20of%20Njamm%20Njamm%20banana%20chips." target="_blank" rel="noopener noreferrer" class="magnetic-btn cta-button-glow block w-full px-8 py-4 rounded-full font-display font-black text-sm uppercase tracking-widest text-center">
+            Order via WhatsApp
+          </a>
+          <p class="text-[10px] text-white/40 tracking-wider font-medium mt-4">Boxes are limited to 1,500 per harvest. Reserve yours now.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-black py-12 px-6 md:px-12 border-t border-white/5 text-sm text-white/40">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-3">
+        <img src="assets/Logo.png" alt="Logo" class="h-12 w-auto object-contain filter grayscale opacity-45 rounded-sm">
+        <span class="font-display font-black text-sm tracking-widest text-white/40">NJAMM NJAMM</span>
+      </div>
+      
+      <div class="flex gap-8 uppercase tracking-widest font-semibold text-[10px]">
+        <a href="#hero" class="hover:text-gold transition-colors">Reveal</a>
+        <a href="#anatomy" class="hover:text-gold transition-colors">Anatomy</a>
+        <a href="#precision" class="hover:text-gold transition-colors">Precision</a>
+        <a href="#liquid-gold" class="hover:text-gold transition-colors">Liquid Gold</a>
+        <a href="#final-touch" class="hover:text-gold transition-colors">Touch</a>
+      </div>
+      
+      <div>
+        <p class="text-[11px] font-light">&copy; 2026 Njamm Njamm Ltd. Sown, Fried, and Hand-salted in Kerala, India.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP Core & ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Custom Logic JS -->
+  <script src="app.js"></script>
+</body>
+</html>
