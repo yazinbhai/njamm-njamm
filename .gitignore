@@ -1,0 +1,7 @@
+# Temporary Converter outputs
+assets/Any Video Converter/
+*.tmp
+
+# OS metadata files
+.DS_Store
+Thumbs.db
