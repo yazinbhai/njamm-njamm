@@ -86,8 +86,8 @@ function initHeroReveal() {
     0
   )
   .fromTo('#hero video', 
-    { opacity: 0.9 },
-    { opacity: 0.18, ease: 'power1.out' }, 
+    { opacity: 0.7 },
+    { opacity: 0.14, ease: 'power1.out' }, 
     0
   );
 }
