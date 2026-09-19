@@ -1,5 +1,5 @@
 // Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // Custom Cursor Follower Logic
 function initCustomCursor() {
@@ -94,14 +94,14 @@ function initHeroReveal() {
 
 // Staggered Typography Reveals for Chapters
 function initTypographyReveals() {
-  const sections = ['#anatomy', '#precision', '#liquid-gold', '#final-touch', '#cta'];
+  const sections = ['#ingredients', '#thickness', '#medium', '#seasoning', '#cta'];
   
   sections.forEach(section => {
     let selectClass = '';
-    if (section === '#anatomy') selectClass = '.anatomy-element';
-    else if (section === '#precision') selectClass = '.precision-element';
-    else if (section === '#liquid-gold') selectClass = '.liquid-gold-element';
-    else if (section === '#final-touch') selectClass = '.final-touch-element';
+    if (section === '#ingredients') selectClass = '.ingredients-element';
+    else if (section === '#thickness') selectClass = '.thickness-element';
+    else if (section === '#medium') selectClass = '.medium-element';
+    else if (section === '#seasoning') selectClass = '.seasoning-element';
     else if (section === '#cta') selectClass = '.cta-element';
 
     gsap.to(selectClass, {
@@ -119,9 +119,9 @@ function initTypographyReveals() {
 
     // Scale animations triggered at same visibility
     let scaleClass = '';
-    if (section === '#anatomy') scaleClass = '.anatomy-scale';
-    else if (section === '#precision') scaleClass = '.precision-scale';
-    else if (section === '#final-touch') scaleClass = '.final-touch-scale';
+    if (section === '#ingredients') scaleClass = '.ingredients-scale';
+    else if (section === '#thickness') scaleClass = '.thickness-scale';
+    else if (section === '#seasoning') scaleClass = '.seasoning-scale';
     else if (section === '#cta') scaleClass = '.cta-scale';
 
     if (scaleClass) {
@@ -140,14 +140,14 @@ function initTypographyReveals() {
   });
 }
 
-// 2. Section 3 (Precision Cut): Multi-layered Parallax
-function initPrecisionParallax() {
+// 2. Section 3 (Thickness Cut): Multi-layered Parallax
+function initThicknessParallax() {
   // Background layer: moves slow (scrub: 0.4 weight equivalent)
-  gsap.to('.precision-bg-layer', {
+  gsap.to('.thickness-bg-layer', {
     y: -30,
     ease: 'none',
     scrollTrigger: {
-      trigger: '#precision',
+      trigger: '#thickness',
       start: 'top bottom',
       end: 'bottom top',
       scrub: 0.4
@@ -155,11 +155,11 @@ function initPrecisionParallax() {
   });
 
   // Midground layer: standard speed
-  gsap.to('.precision-mid-layer', {
+  gsap.to('.thickness-mid-layer', {
     y: -70,
     ease: 'none',
     scrollTrigger: {
-      trigger: '#precision',
+      trigger: '#thickness',
       start: 'top bottom',
       end: 'bottom top',
       scrub: 0.8
@@ -167,11 +167,11 @@ function initPrecisionParallax() {
   });
 
   // Foreground layer: moves fast (scrub: 1.5 weight equivalent)
-  gsap.to('.precision-fg-layer', {
+  gsap.to('.thickness-fg-layer', {
     y: -140,
     ease: 'none',
     scrollTrigger: {
-      trigger: '#precision',
+      trigger: '#thickness',
       start: 'top bottom',
       end: 'bottom top',
       scrub: 1.5
@@ -181,12 +181,12 @@ function initPrecisionParallax() {
 
 // 3. Sections 4 & 5 (Oil & Salt): Continuous vertical parallax scroll
 function initContinuousParallax() {
-  // Section 4: Liquid Gold
-  gsap.to('.liquid-gold-bg', {
+  // Section 4: Medium
+  gsap.to('.medium-bg', {
     y: '-20%',
     ease: 'none',
     scrollTrigger: {
-      trigger: '#liquid-gold',
+      trigger: '#medium',
       start: 'top bottom',
       end: 'bottom top',
       scrub: true
@@ -194,24 +194,24 @@ function initContinuousParallax() {
   });
 
   // Text layer floats faster
-  gsap.to('#liquid-gold .relative.z-10', {
+  gsap.to('#medium .relative.z-10', {
     y: -100,
     ease: 'none',
     scrollTrigger: {
-      trigger: '#liquid-gold',
+      trigger: '#medium',
       start: 'top bottom',
       end: 'bottom top',
       scrub: true
     }
   });
 
-  // Section 5: The Final Touch
+  // Section 5: Seasoning
   // Image card floats slower
-  gsap.to('.final-touch-scale', {
+  gsap.to('.seasoning-scale', {
     y: -50,
     ease: 'none',
     scrollTrigger: {
-      trigger: '#final-touch',
+      trigger: '#seasoning',
       start: 'top bottom',
       end: 'bottom top',
       scrub: true
@@ -219,11 +219,11 @@ function initContinuousParallax() {
   });
 
   // Text details float faster
-  gsap.to('#final-touch .lg\\:col-span-5', {
+  gsap.to('#seasoning .lg\\:col-span-5', {
     y: -120,
     ease: 'none',
     scrollTrigger: {
-      trigger: '#final-touch',
+      trigger: '#seasoning',
       start: 'top bottom',
       end: 'bottom top',
       scrub: true
@@ -260,12 +260,36 @@ function initMagneticButtons() {
   });
 }
 
+// Smooth Anchor Navigation Handling with GSAP ScrollTo
+function initSmoothNavigation() {
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  anchorLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        gsap.to(window, {
+          duration: 1.2,
+          scrollTo: {
+            y: targetElement,
+            offsetY: 60
+          },
+          ease: 'power2.inOut'
+        });
+      }
+    });
+  });
+}
+
 // Initialize on Load
 window.addEventListener('DOMContentLoaded', () => {
   initCustomCursor();
   initHeroReveal();
   initTypographyReveals();
-  initPrecisionParallax();
+  initThicknessParallax();
   initContinuousParallax();
   initMagneticButtons();
+  initSmoothNavigation();
 });
