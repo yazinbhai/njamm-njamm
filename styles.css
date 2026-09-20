@@ -17,12 +17,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
 body {
+  width: 100%;
+  max-width: 100%;
   background-color: var(--color-bg);
   color: #FFFFFF;
   font-family: var(--font-sans);
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   user-select: none;
+  position: relative;
+}
+
+main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Custom Cursor on Desktop */
