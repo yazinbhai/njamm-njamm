@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://njammnjamm.com/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://njammnjamm.com/assets/Njam%20Njam%20Packet.png</image:loc>
+      <image:title>Njamm Njamm Premium Kerala Banana Chips Packaging</image:title>
+      <image:caption>Authentic wood-fired Kerala Nendran banana chips fried in 100% pure coconut oil.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://njammnjamm.com/assets/Ingredients.jpeg</image:loc>
+      <image:title>Pure Organic Ingredients</image:title>
+      <image:caption>Nendran Bananas, Pure Coconut Oil, Pristine Sea Salt.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://njammnjamm.com/assets/Banana_slices_suspended_in_air.jpeg</image:loc>
+      <image:title>Thickness Cut Nendran Banana Slices</image:title>
+      <image:caption>Calibrated thin slice for ultimate crunch.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://njammnjamm.com/assets/Coconut_oil_flowing_through_space.jpeg</image:loc>
+      <image:title>100% Pure Cold-Pressed Coconut Oil</image:title>
+      <image:caption>Unadulterated coconut oil for authentic Kerala taste.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://njammnjamm.com/assets/Salting%20banana%20chips.jpeg</image:loc>
+      <image:title>Hand-Salted Sea Salt Seasoning</image:title>
+      <image:caption>Fine sea salt crystals showered over freshly fried banana chips.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://njamm-njamm.vercel.app/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>

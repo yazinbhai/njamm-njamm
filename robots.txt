@@ -1,0 +1,33 @@
+# User-agent rules for Search Engines & AI Crawlers
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /favicon.ico
+Allow: /favicon.png
+Allow: /llms.txt
+
+# Explicit AI Crawlers (ChatGPT, Claude, Perplexity, Gemini, Apple Intelligence)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Sitemap Index
+Sitemap: https://njammnjamm.com/sitemap.xml
+Sitemap: https://njamm-njamm.vercel.app/sitemap.xml
