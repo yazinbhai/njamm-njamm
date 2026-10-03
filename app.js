@@ -283,6 +283,15 @@ function initSmoothNavigation() {
   });
 }
 
+// Global Horizontal Scroll Lock Guard
+function initHorizontalScrollLock() {
+  window.addEventListener('scroll', () => {
+    if (window.scrollX !== 0) {
+      window.scrollTo(0, window.scrollY);
+    }
+  }, { passive: true });
+}
+
 // Initialize on Load
 window.addEventListener('DOMContentLoaded', () => {
   initCustomCursor();
@@ -292,4 +301,5 @@ window.addEventListener('DOMContentLoaded', () => {
   initContinuousParallax();
   initMagneticButtons();
   initSmoothNavigation();
+  initHorizontalScrollLock();
 });
