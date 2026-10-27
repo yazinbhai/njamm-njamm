@@ -94,7 +94,7 @@ function initHeroReveal() {
 
 // Staggered Typography Reveals for Chapters
 function initTypographyReveals() {
-  const sections = ['#ingredients', '#thickness', '#medium', '#seasoning', '#cta'];
+  const sections = ['#ingredients', '#thickness', '#medium', '#seasoning', '#testimonials', '#cta'];
   
   sections.forEach(section => {
     let selectClass = '';
@@ -102,6 +102,7 @@ function initTypographyReveals() {
     else if (section === '#thickness') selectClass = '.thickness-element';
     else if (section === '#medium') selectClass = '.medium-element';
     else if (section === '#seasoning') selectClass = '.seasoning-element';
+    else if (section === '#testimonials') selectClass = '.testimonials-element';
     else if (section === '#cta') selectClass = '.cta-element';
 
     gsap.to(selectClass, {

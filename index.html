@@ -228,6 +228,7 @@
         <a href="#thickness" class="hover:text-gold transition-colors duration-200">Thickness</a>
         <a href="#medium" class="hover:text-gold transition-colors duration-200">Medium</a>
         <a href="#seasoning" class="hover:text-gold transition-colors duration-200">Seasoning</a>
+        <a href="#testimonials" class="hover:text-gold transition-colors duration-200">Testimonials</a>
         <a href="#cta" class="hover:text-gold transition-colors duration-200">Order</a>
       </nav>
 
@@ -396,6 +397,60 @@
       </div>
     </section>
 
+    <!-- Testimonials Showcase (Directly below Chapter 4) -->
+    <section id="testimonials" class="relative w-full bg-black py-20 md:py-28 px-4 sm:px-8 border-t border-white/5 overflow-hidden select-none">
+      <!-- Ambient light glowing ring in back -->
+      <div class="absolute w-80 h-80 max-w-full rounded-full bg-gold/5 blur-[120px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10"></div>
+
+      <div class="max-w-5xl mx-auto relative z-10 flex flex-col items-center text-center">
+        <!-- Top Circular Golden Quote Badge matching reference design -->
+        <div class="mb-7 flex items-center justify-center opacity-0 translate-y-8 testimonials-element">
+          <div class="w-10 h-10 md:w-11 md:h-11 rounded-full bg-[#E5A812] flex items-center justify-center shadow-md shadow-gold/20">
+            <svg class="w-5 h-5 text-black fill-current" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Carousel Container with Arrows and Centered Testimonial -->
+        <div class="relative w-full flex items-center justify-between gap-2 sm:gap-6 opacity-0 translate-y-8 testimonials-element">
+          <!-- Left Arrow (<) -->
+          <button id="testimonial-prev" type="button" aria-label="Previous Testimonial" class="p-2 sm:p-4 text-white/30 hover:text-white transition-all duration-200 focus:outline-none flex-shrink-0 group">
+            <svg class="w-6 h-6 sm:w-8 sm:h-8 transform group-hover:-translate-x-1 transition-transform stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <!-- Testimonial Content Box -->
+          <div class="flex-1 max-w-3xl px-2 sm:px-6 min-h-[130px] flex flex-col justify-center items-center">
+            <!-- Review Text -->
+            <p id="testimonial-text" class="text-white text-base sm:text-lg md:text-xl font-normal leading-relaxed md:leading-relaxed transition-all duration-300">
+              Njamm Njamm products are so delicious. Banana chips are thin and crispy. The Sharkkaravaratty is sweet
+            </p>
+
+            <!-- Customer Author -->
+            <div class="mt-6 flex flex-col items-center">
+              <span id="testimonial-author" class="text-white font-bold text-sm sm:text-base tracking-wide transition-all duration-300">
+                Yazin Azad
+              </span>
+            </div>
+          </div>
+
+          <!-- Right Arrow (>) -->
+          <button id="testimonial-next" type="button" aria-label="Next Testimonial" class="p-2 sm:p-4 text-white/30 hover:text-white transition-all duration-200 focus:outline-none flex-shrink-0 group">
+            <svg class="w-6 h-6 sm:w-8 sm:h-8 transform group-hover:translate-x-1 transition-transform stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Bottom Dot Pagination Indicators -->
+        <div id="testimonial-dots" class="mt-8 flex items-center justify-center gap-2 opacity-0 translate-y-8 testimonials-element">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
     <!-- Section 6: Call to Action -->
     <section id="cta" class="min-h-[60vh] md:min-h-[70vh] relative flex items-center justify-center bg-black pt-10 md:pt-12 pb-10 md:pb-12 overflow-hidden border-t border-white/5">
       <!-- Ambient light glowing ring in back -->
@@ -536,6 +591,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
   
+  <!-- Testimonials Data & Management Services -->
+  <script src="data/testimonials.js"></script>
+  <script src="assets/testimonials-service.js"></script>
+  <script src="assets/testimonials-carousel.js"></script>
+
   <!-- Custom Logic JS -->
   <script src="app.js"></script>
 </body>

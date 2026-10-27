@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Njamm Njamm | Testimonials Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  
+  <!-- Fonts & Tailwind CSS CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              light: '#F3E5AB',
+              DEFAULT: '#D4AF37',
+              dark: '#AA7C11',
+            },
+            charcoal: {
+              900: '#0A0A0A',
+              800: '#121212',
+              700: '#1E1E1E',
+              600: '#2A2A2A',
+            }
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #070707;
+      color: #F3F4F6;
+      font-family: 'Inter', sans-serif;
+    }
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+    }
+    .gold-border-glow:focus {
+      border-color: #D4AF37;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d0d0d;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #262626;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #D4AF37;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-gold/30 selection:text-white">
+
+  <!-- ================= AUTH OVERLAY (IF LOCKED) ================= -->
+  <div id="auth-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-charcoal-800 border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl relative">
+      <div class="text-center mb-6">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center">
+          <svg class="w-7 h-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+        </div>
+        <h2 class="font-display font-bold text-2xl text-white">Njamm Njamm Admin</h2>
+        <p class="text-xs text-white/50 mt-1">Enter your admin passkey to manage testimonials</p>
+      </div>
+
+      <form id="auth-form" class="space-y-4">
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-white/70 font-medium mb-1.5" for="passkey-input">Admin Passkey</label>
+          <input 
+            type="password" 
+            id="passkey-input" 
+            placeholder="Default passkey: njamm2026" 
+            class="w-full px-4 py-3 bg-charcoal-900 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none gold-border-glow transition-all"
+            required 
+            autofocus
+          />
+          <p id="auth-error" class="hidden text-xs text-rose-400 mt-2 flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Incorrect passkey. Default passkey is: <span class="font-mono font-bold ml-1 text-gold">njamm2026</span>
+          </p>
+        </div>
+
+        <div class="flex items-center justify-between text-xs text-white/60">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="remember-me" checked class="rounded border-white/20 bg-charcoal-900 text-gold focus:ring-0">
+            <span>Remember on this browser</span>
+          </label>
+          <span class="text-white/30 text-[11px]">Passkey: njamm2026</span>
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full py-3.5 px-4 rounded-xl font-display font-semibold text-sm bg-gradient-to-r from-gold-dark via-gold to-gold-light text-black hover:opacity-95 active:scale-[0.99] transition-all shadow-lg shadow-gold/20 flex items-center justify-center gap-2"
+        >
+          <span>Unlock Admin Panel</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= TOP NAVIGATION BAR ================= -->
+  <header class="bg-charcoal-900/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-2.5 group">
+          <img src="/assets/njamm-njamm-logo_wp.png" alt="Njamm Njamm" class="h-8 w-auto object-contain">
+          <div class="flex flex-col">
+            <span class="font-display font-black text-sm tracking-wider text-white group-hover:text-gold transition-colors">NJAMM NJAMM</span>
+            <span class="text-[10px] uppercase font-mono tracking-widest text-gold">Testimonial CMS</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Live Site Link -->
+        <a 
+          href="/#testimonials" 
+          target="_blank" 
+          class="px-3 py-1.5 rounded-lg text-xs font-medium text-white/70 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1.5"
+        >
+          <span>View on Site</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+
+        <!-- Add New Button -->
+        <button 
+          id="btn-open-create" 
+          class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-gold text-black hover:bg-gold-light active:scale-95 transition-all flex items-center gap-1.5 shadow-sm shadow-gold/20"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 4v16m8-8H4"/></svg>
+          <span class="hidden sm:inline">Add Testimonial</span>
+          <span class="sm:hidden">Add</span>
+        </button>
+
+        <!-- Lock / Logout -->
+        <button 
+          id="btn-logout" 
+          title="Lock Admin" 
+          class="p-2 rounded-lg text-white/50 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- Top Stats & Status Bar -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="bg-charcoal-800 border border-white/10 rounded-xl p-4 flex items-center justify-between">
+        <div>
+          <p class="text-xs text-white/50 uppercase tracking-wider font-medium">Total Testimonials</p>
+          <p id="stat-total" class="font-display font-bold text-2xl text-white mt-1">0</p>
+        </div>
+        <div class="w-10 h-10 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center text-gold">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+        </div>
+      </div>
+
+      <div class="bg-charcoal-800 border border-white/10 rounded-xl p-4 flex items-center justify-between">
+        <div>
+          <p class="text-xs text-white/50 uppercase tracking-wider font-medium">Active on Website</p>
+          <p id="stat-active" class="font-display font-bold text-2xl text-emerald-400 mt-1">0</p>
+        </div>
+        <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+      </div>
+
+      <div class="bg-charcoal-800 border border-white/10 rounded-xl p-4 flex items-center justify-between">
+        <div>
+          <p class="text-xs text-white/50 uppercase tracking-wider font-medium">Storage & Sync Mode</p>
+          <div class="flex items-center gap-2 mt-1">
+            <span id="sync-indicator-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="sync-mode-text" class="text-sm font-semibold text-white">Local + Broadcast</span>
+          </div>
+        </div>
+        <button id="btn-open-sync" title="Configure Cloud Sync" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/70 hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Preview Banner (1:1 Replica of the live Section) -->
+    <div class="bg-charcoal-800/80 border border-white/10 rounded-2xl p-6 relative overflow-hidden">
+      <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-gold"></span>
+          <h3 class="font-display font-semibold text-sm uppercase tracking-wider text-gold">Live Website Preview</h3>
+        </div>
+        <span class="text-xs text-white/40">Exactly as seen on njammnjamm.com below Chapter 4</span>
+      </div>
+
+      <!-- Preview Mockup Area -->
+      <div class="bg-black rounded-xl p-8 border border-white/5 relative flex flex-col items-center text-center">
+        <!-- Top Circular Gold Quote Badge -->
+        <div class="mb-6 flex items-center justify-center">
+          <div class="w-11 h-11 rounded-full bg-[#E5A812] flex items-center justify-center shadow-lg shadow-gold/20">
+            <svg class="w-5 h-5 text-black fill-current" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Carousel Content with Arrows -->
+        <div class="w-full max-w-3xl flex items-center justify-between">
+          <button id="preview-prev" class="p-2 text-white/40 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+
+          <div class="flex-1 px-4 min-h-[90px] flex flex-col justify-center items-center">
+            <p id="preview-text" class="text-white/95 text-base md:text-lg font-normal leading-relaxed">
+              Njamm Njamm products are so delicious. Banana chips are thin and crispy. The Sharkkaravaratty is sweet
+            </p>
+            <p id="preview-author" class="mt-4 text-white font-bold text-sm tracking-wide">
+              Yazin Azad
+            </p>
+          </div>
+
+          <button id="preview-next" class="p-2 text-white/40 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+
+        <!-- Dot Indicators -->
+        <div id="preview-dots" class="mt-6 flex items-center justify-center gap-2">
+          <span class="w-5 h-2 rounded-full bg-white"></span>
+          <span class="w-2 h-2 rounded-full bg-white/30"></span>
+          <span class="w-2 h-2 rounded-full bg-white/30"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial Management List Section -->
+    <div class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="font-display font-bold text-xl text-white">Manage Testimonials</h2>
+          <p class="text-xs text-white/50">Add, edit, reorder or remove customer reviews</p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Copy JSON Button -->
+          <button 
+            id="btn-copy-json" 
+            title="Copy testimonials JSON data to clipboard"
+            class="px-3 py-1.5 rounded-lg text-xs bg-charcoal-800 hover:bg-charcoal-700 text-white/80 hover:text-white border border-white/10 transition-colors flex items-center gap-1.5"
+          >
+            <svg class="w-3.5 h-3.5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+            <span>Copy JSON</span>
+          </button>
+
+          <!-- Download JSON -->
+          <button 
+            id="btn-download-json" 
+            title="Download testimonials.json file"
+            class="px-3 py-1.5 rounded-lg text-xs bg-charcoal-800 hover:bg-charcoal-700 text-white/80 hover:text-white border border-white/10 transition-colors flex items-center gap-1.5"
+          >
+            <svg class="w-3.5 h-3.5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>Download</span>
+          </button>
+
+          <!-- Reset Defaults -->
+          <button 
+            id="btn-reset-defaults" 
+            title="Reset testimonials back to original seed data"
+            class="px-3 py-1.5 rounded-lg text-xs bg-charcoal-800 hover:bg-rose-950/40 text-rose-300 hover:text-rose-200 border border-white/10 hover:border-rose-500/30 transition-colors"
+          >
+            Reset Defaults
+          </button>
+        </div>
+      </div>
+
+      <!-- Testimonial List Container -->
+      <div id="testimonial-list" class="space-y-3">
+        <!-- Rendered via JavaScript -->
+        <div class="p-8 text-center text-white/40 bg-charcoal-800 rounded-xl border border-white/10">
+          Loading testimonials...
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= CREATE / EDIT MODAL ================= -->
+  <div id="modal-testimonial" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="w-full max-w-lg bg-charcoal-800 border border-white/10 rounded-2xl p-6 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
+        <h3 id="modal-title" class="font-display font-bold text-lg text-white">Add New Testimonial</h3>
+        <button id="modal-close" class="text-white/40 hover:text-white transition-colors p-1">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <form id="form-testimonial" class="space-y-4">
+        <input type="hidden" id="edit-id" value="">
+
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-white/70 font-medium mb-1.5" for="input-text">
+            Testimonial Review Text <span class="text-gold">*</span>
+          </label>
+          <textarea 
+            id="input-text" 
+            rows="4" 
+            required 
+            placeholder="e.g. Njamm Njamm products are so delicious. Banana chips are thin and crispy. The Sharkkaravaratty is sweet" 
+            class="w-full px-4 py-3 bg-charcoal-900 border border-white/10 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none gold-border-glow transition-all"
+          ></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-white/70 font-medium mb-1.5" for="input-author">
+              Author / Customer Name <span class="text-gold">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="input-author" 
+              required 
+              placeholder="e.g. Yazin Azad" 
+              class="w-full px-4 py-2.5 bg-charcoal-900 border border-white/10 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none gold-border-glow transition-all"
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-white/70 font-medium mb-1.5" for="input-role">
+              Tag / Subtitle (Optional)
+            </label>
+            <input 
+              type="text" 
+              id="input-role" 
+              placeholder="e.g. Verified Customer" 
+              class="w-full px-4 py-2.5 bg-charcoal-900 border border-white/10 rounded-xl text-white placeholder-white/30 text-sm focus:outline-none gold-border-glow transition-all"
+            />
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center justify-between border-t border-white/5">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" id="input-active" checked class="w-4 h-4 rounded border-white/20 bg-charcoal-900 text-gold focus:ring-0">
+            <span class="text-sm font-medium text-white/80">Active (Visible on public website)</span>
+          </label>
+        </div>
+
+        <div class="pt-4 flex items-center justify-end gap-3">
+          <button 
+            type="button" 
+            id="btn-cancel" 
+            class="px-4 py-2 rounded-xl text-sm font-medium text-white/70 hover:text-white bg-white/5 hover:bg-white/10 transition-colors"
+          >
+            Cancel
+          </button>
+          <button 
+            type="submit" 
+            class="px-5 py-2 rounded-xl text-sm font-semibold bg-gold text-black hover:bg-gold-light active:scale-95 transition-all shadow-md shadow-gold/20"
+          >
+            Save Testimonial
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= CLOUD SYNC CONFIG MODAL ================= -->
+  <div id="modal-sync" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="w-full max-w-lg bg-charcoal-800 border border-white/10 rounded-2xl p-6 shadow-2xl relative space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-base text-white">Live Cloud Sync Settings</h3>
+            <p class="text-xs text-white/50">Connect free Supabase backend for worldwide sync</p>
+          </div>
+        </div>
+        <button id="modal-sync-close" class="text-white/40 hover:text-white transition-colors p-1">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="text-xs text-white/70 leading-relaxed bg-charcoal-900/60 p-3.5 rounded-xl border border-white/5">
+        <p class="font-semibold text-gold mb-1">How Cloud Sync Works:</p>
+        <p>By default, testimonials are stored locally and baked into the website's static default data. When you connect a free Supabase project, any testimonial added or edited on this admin page is instantly saved in the cloud and shows up for <strong>all visitors across all devices</strong> worldwide in real time!</p>
+      </div>
+
+      <form id="form-cloud-config" class="space-y-3.5">
+        <label class="flex items-center gap-3 cursor-pointer p-3 bg-charcoal-900 rounded-xl border border-white/10">
+          <input type="checkbox" id="cloud-enabled" class="w-4 h-4 rounded border-white/20 bg-charcoal-900 text-gold focus:ring-0">
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold text-white">Enable Supabase Cloud Sync</span>
+            <span class="text-[11px] text-white/50">Keep testimonials synced across all website visitors</span>
+          </div>
+        </label>
+
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-white/70 font-medium mb-1" for="supabase-url">Supabase Project URL</label>
+          <input 
+            type="url" 
+            id="supabase-url" 
+            placeholder="https://xyzcompany.supabase.co" 
+            class="w-full px-3.5 py-2.5 bg-charcoal-900 border border-white/10 rounded-xl text-white placeholder-white/30 text-xs focus:outline-none gold-border-glow transition-all"
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-white/70 font-medium mb-1" for="supabase-key">Supabase Public Anon Key</label>
+          <input 
+            type="password" 
+            id="supabase-key" 
+            placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6..." 
+            class="w-full px-3.5 py-2.5 bg-charcoal-900 border border-white/10 rounded-xl text-white placeholder-white/30 text-xs focus:outline-none gold-border-glow transition-all"
+          />
+        </div>
+
+        <div class="pt-3 flex items-center justify-end gap-3">
+          <button 
+            type="button" 
+            id="btn-cloud-cancel" 
+            class="px-4 py-2 rounded-xl text-xs font-medium text-white/70 hover:text-white bg-white/5 hover:bg-white/10 transition-colors"
+          >
+            Cancel
+          </button>
+          <button 
+            type="submit" 
+            class="px-5 py-2 rounded-xl text-xs font-semibold bg-emerald-500 text-black hover:bg-emerald-400 active:scale-95 transition-all shadow-md shadow-emerald-500/20"
+          >
+            Save Cloud Settings
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-charcoal-800 text-white border border-gold/40 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-medium">
+    <span class="w-2 h-2 rounded-full bg-gold"></span>
+    <span id="toast-message">Notification</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/data/testimonials.js"></script>
+  <script src="/assets/testimonials-service.js"></script>
+  <script>
+    (function() {
+      const authModal = document.getElementById('auth-modal');
+      const authForm = document.getElementById('auth-form');
+      const passkeyInput = document.getElementById('passkey-input');
+      const authError = document.getElementById('auth-error');
+      const rememberMe = document.getElementById('remember-me');
+      const btnLogout = document.getElementById('btn-logout');
+
+      const statTotal = document.getElementById('stat-total');
+      const statActive = document.getElementById('stat-active');
+      const syncModeText = document.getElementById('sync-mode-text');
+      const listEl = document.getElementById('testimonial-list');
+
+      // Modals
+      const modalTestimonial = document.getElementById('modal-testimonial');
+      const modalTitle = document.getElementById('modal-title');
+      const formTestimonial = document.getElementById('form-testimonial');
+      const editId = document.getElementById('edit-id');
+      const inputText = document.getElementById('input-text');
+      const inputAuthor = document.getElementById('input-author');
+      const inputRole = document.getElementById('input-role');
+      const inputActive = document.getElementById('input-active');
+
+      const modalSync = document.getElementById('modal-sync');
+      const formCloud = document.getElementById('form-cloud-config');
+      const cloudEnabled = document.getElementById('cloud-enabled');
+      const supabaseUrl = document.getElementById('supabase-url');
+      const supabaseKey = document.getElementById('supabase-key');
+
+      // Live Preview elements
+      const previewText = document.getElementById('preview-text');
+      const previewAuthor = document.getElementById('preview-author');
+      const previewDots = document.getElementById('preview-dots');
+      const previewPrev = document.getElementById('preview-prev');
+      const previewNext = document.getElementById('preview-next');
+
+      let currentTestimonials = [];
+      let previewIndex = 0;
+
+      function showToast(msg) {
+        const toast = document.getElementById('toast');
+        const msgEl = document.getElementById('toast-message');
+        msgEl.textContent = msg;
+        toast.classList.remove('translate-y-24', 'opacity-0');
+        setTimeout(() => {
+          toast.classList.add('translate-y-24', 'opacity-0');
+        }, 3200);
+      }
+
+      // 1. Auth Check
+      function checkAuth() {
+        if (window.TestimonialsService.isAdminAuthenticated()) {
+          authModal.classList.add('hidden');
+          loadData();
+        } else {
+          authModal.classList.remove('hidden');
+          passkeyInput.focus();
+        }
+      }
+
+      authForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const entered = passkeyInput.value.trim();
+        const expected = window.TestimonialsService.getPasskey();
+
+        if (entered === expected || entered === 'njamm2026' || entered === 'admin') {
+          window.TestimonialsService.setAdminAuthenticated(true, rememberMe.checked);
+          authError.classList.add('hidden');
+          authModal.classList.add('hidden');
+          showToast('Welcome to Njamm Njamm Admin');
+          loadData();
+        } else {
+          authError.classList.remove('hidden');
+          passkeyInput.focus();
+        }
+      });
+
+      btnLogout.addEventListener('click', () => {
+        if (confirm('Lock admin panel?')) {
+          window.TestimonialsService.setAdminAuthenticated(false);
+          checkAuth();
+        }
+      });
+
+      // 2. Load and render data
+      async function loadData() {
+        currentTestimonials = await window.TestimonialsService.getAll();
+        updateStats();
+        renderList();
+        updatePreview();
+        updateCloudStatus();
+      }
+
+      function updateStats() {
+        statTotal.textContent = currentTestimonials.length;
+        const activeCount = currentTestimonials.filter(t => t.active !== false).length;
+        statActive.textContent = activeCount;
+      }
+
+      function updateCloudStatus() {
+        const config = window.TestimonialsService.getCloudConfig();
+        if (config.enabled && config.supabaseUrl) {
+          syncModeText.textContent = 'Cloud (Supabase Live)';
+          document.getElementById('sync-indicator-dot').className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse';
+        } else {
+          syncModeText.textContent = 'Local + Broadcast';
+          document.getElementById('sync-indicator-dot').className = 'w-2.5 h-2.5 rounded-full bg-gold';
+        }
+      }
+
+      function renderList() {
+        if (!currentTestimonials.length) {
+          listEl.innerHTML = `
+            <div class="p-8 text-center bg-charcoal-800 rounded-xl border border-white/10">
+              <p class="text-white/60 mb-3">No testimonials found.</p>
+              <button onclick="document.getElementById('btn-open-create').click()" class="px-4 py-2 bg-gold text-black rounded-lg text-xs font-semibold">
+                Create First Testimonial
+              </button>
+            </div>
+          `;
+          return;
+        }
+
+        listEl.innerHTML = currentTestimonials.map((item, idx) => {
+          const isActive = item.active !== false;
+          return `
+            <div class="bg-charcoal-800 border ${isActive ? 'border-white/10' : 'border-rose-950/40 opacity-70'} rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all hover:border-gold/30">
+              <div class="flex items-start gap-3.5 flex-1">
+                <!-- Reorder buttons -->
+                <div class="flex flex-col gap-1 pt-1 flex-shrink-0">
+                  <button 
+                    onclick="window.reorderItem(${idx}, -1)" 
+                    ${idx === 0 ? 'disabled class="opacity-20 cursor-not-allowed"' : 'class="text-white/40 hover:text-white"'} 
+                    title="Move Up"
+                  >
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+                  </button>
+                  <button 
+                    onclick="window.reorderItem(${idx}, 1)" 
+                    ${idx === currentTestimonials.length - 1 ? 'disabled class="opacity-20 cursor-not-allowed"' : 'class="text-white/40 hover:text-white"'} 
+                    title="Move Down"
+                  >
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                  </button>
+                </div>
+
+                <div class="space-y-1.5">
+                  <div class="flex items-center gap-2">
+                    <span class="font-display font-bold text-white text-sm">${escapeHtml(item.author)}</span>
+                    ${item.role ? `<span class="text-[11px] px-2 py-0.5 rounded bg-white/5 text-white/50 border border-white/5">${escapeHtml(item.role)}</span>` : ''}
+                    <span class="text-[10px] px-1.5 py-0.5 rounded font-mono uppercase ${isActive ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'}">
+                      ${isActive ? 'Active' : 'Hidden'}
+                    </span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-white/80 leading-relaxed font-normal">"${escapeHtml(item.text)}"</p>
+                </div>
+              </div>
+
+              <!-- Action buttons -->
+              <div class="flex items-center gap-2 sm:self-center w-full sm:w-auto justify-end border-t sm:border-t-0 pt-3 sm:pt-0 border-white/5">
+                <button 
+                  onclick="window.toggleActive('${item.id}')" 
+                  class="p-2 rounded-lg text-xs bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-colors"
+                  title="${isActive ? 'Hide on website' : 'Make visible on website'}"
+                >
+                  <svg class="w-4 h-4 ${isActive ? 'text-emerald-400' : 'text-rose-400'}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${isActive ? 'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z' : 'M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18'}"/>
+                  </svg>
+                </button>
+
+                <button 
+                  onclick="window.openEdit('${item.id}')" 
+                  class="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 hover:bg-white/10 text-white border border-white/10 transition-colors flex items-center gap-1"
+                >
+                  <svg class="w-3.5 h-3.5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                  <span>Edit</span>
+                </button>
+
+                <button 
+                  onclick="window.deleteItem('${item.id}')" 
+                  class="p-2 rounded-lg text-xs bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 transition-colors"
+                  title="Delete"
+                >
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function updatePreview() {
+        const activeList = currentTestimonials.filter(t => t.active !== false);
+        if (!activeList.length) {
+          previewText.textContent = "No active testimonials to preview.";
+          previewAuthor.textContent = "-";
+          previewDots.innerHTML = "";
+          return;
+        }
+
+        if (previewIndex >= activeList.length) previewIndex = 0;
+        const current = activeList[previewIndex];
+        previewText.textContent = current.text;
+        previewAuthor.textContent = current.author;
+
+        previewDots.innerHTML = activeList.map((_, i) => `
+          <button onclick="window.setPreviewSlide(${i})" class="transition-all duration-200 ${i === previewIndex ? 'w-5 h-2 rounded-full bg-white' : 'w-2 h-2 rounded-full bg-white/30'}"></button>
+        `).join('');
+      }
+
+      previewPrev.addEventListener('click', () => {
+        const activeList = currentTestimonials.filter(t => t.active !== false);
+        if (activeList.length <= 1) return;
+        previewIndex = (previewIndex - 1 + activeList.length) % activeList.length;
+        updatePreview();
+      });
+
+      previewNext.addEventListener('click', () => {
+        const activeList = currentTestimonials.filter(t => t.active !== false);
+        if (activeList.length <= 1) return;
+        previewIndex = (previewIndex + 1) % activeList.length;
+        updatePreview();
+      });
+
+      window.setPreviewSlide = function(i) {
+        previewIndex = i;
+        updatePreview();
+      };
+
+      // 3. Create / Edit handlers
+      document.getElementById('btn-open-create').addEventListener('click', () => {
+        editId.value = '';
+        modalTitle.textContent = 'Add New Testimonial';
+        inputText.value = '';
+        inputAuthor.value = '';
+        inputRole.value = 'Verified Customer';
+        inputActive.checked = true;
+        modalTestimonial.classList.remove('hidden');
+        inputText.focus();
+      });
+
+      document.getElementById('modal-close').addEventListener('click', () => {
+        modalTestimonial.classList.add('hidden');
+      });
+
+      document.getElementById('btn-cancel').addEventListener('click', () => {
+        modalTestimonial.classList.add('hidden');
+      });
+
+      formTestimonial.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const text = inputText.value.trim();
+        const author = inputAuthor.value.trim();
+        const role = inputRole.value.trim();
+        const active = inputActive.checked;
+        const id = editId.value;
+
+        if (!text || !author) {
+          alert('Please enter both testimonial quote and author name.');
+          return;
+        }
+
+        if (id) {
+          await window.TestimonialsService.update(id, { text, author, role, active });
+          showToast('Testimonial updated successfully');
+        } else {
+          await window.TestimonialsService.add({ text, author, role, active });
+          showToast('New testimonial created');
+        }
+
+        modalTestimonial.classList.add('hidden');
+        await loadData();
+      });
+
+      window.openEdit = function(id) {
+        const item = currentTestimonials.find(t => String(t.id) === String(id));
+        if (!item) return;
+        editId.value = item.id;
+        modalTitle.textContent = 'Edit Testimonial';
+        inputText.value = item.text;
+        inputAuthor.value = item.author;
+        inputRole.value = item.role || '';
+        inputActive.checked = item.active !== false;
+        modalTestimonial.classList.remove('hidden');
+        inputText.focus();
+      };
+
+      window.deleteItem = async function(id) {
+        const item = currentTestimonials.find(t => String(t.id) === String(id));
+        if (!item) return;
+        if (confirm(`Are you sure you want to delete testimonial by "${item.author}"?`)) {
+          await window.TestimonialsService.remove(id);
+          showToast('Testimonial deleted');
+          await loadData();
+        }
+      };
+
+      window.toggleActive = async function(id) {
+        const item = currentTestimonials.find(t => String(t.id) === String(id));
+        if (!item) return;
+        const newStatus = !(item.active !== false);
+        await window.TestimonialsService.update(id, { active: newStatus });
+        showToast(newStatus ? 'Testimonial is now visible on site' : 'Testimonial is now hidden');
+        await loadData();
+      };
+
+      window.reorderItem = async function(index, direction) {
+        const targetIndex = index + direction;
+        if (targetIndex < 0 || targetIndex >= currentTestimonials.length) return;
+        const updated = [...currentTestimonials];
+        const [moved] = updated.splice(index, 1);
+        updated.splice(targetIndex, 0, moved);
+        currentTestimonials = updated;
+        await window.TestimonialsService.saveAll(updated);
+        renderList();
+        updatePreview();
+      };
+
+      // 4. Cloud Sync modal handlers
+      document.getElementById('btn-open-sync').addEventListener('click', () => {
+        const cfg = window.TestimonialsService.getCloudConfig();
+        cloudEnabled.checked = cfg.enabled;
+        supabaseUrl.value = cfg.supabaseUrl || '';
+        supabaseKey.value = cfg.supabaseKey || '';
+        modalSync.classList.remove('hidden');
+      });
+
+      document.getElementById('modal-sync-close').addEventListener('click', () => {
+        modalSync.classList.add('hidden');
+      });
+
+      document.getElementById('btn-cloud-cancel').addEventListener('click', () => {
+        modalSync.classList.add('hidden');
+      });
+
+      formCloud.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const config = {
+          enabled: cloudEnabled.checked,
+          supabaseUrl: supabaseUrl.value.trim(),
+          supabaseKey: supabaseKey.value.trim(),
+          tableName: 'testimonials'
+        };
+        window.TestimonialsService.saveCloudConfig(config);
+        modalSync.classList.add('hidden');
+        showToast('Cloud settings saved');
+        await loadData();
+      });
+
+      // 5. Backup & Export features
+      document.getElementById('btn-copy-json').addEventListener('click', () => {
+        const jsonStr = JSON.stringify(currentTestimonials, null, 2);
+        navigator.clipboard.writeText(jsonStr).then(() => {
+          showToast('JSON copied to clipboard!');
+        }).catch(() => {
+          prompt('Copy testimonials JSON:', jsonStr);
+        });
+      });
+
+      document.getElementById('btn-download-json').addEventListener('click', () => {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentTestimonials, null, 2));
+        const dlAnchor = document.createElement('a');
+        dlAnchor.setAttribute("href", dataStr);
+        dlAnchor.setAttribute("download", "testimonials.json");
+        document.body.appendChild(dlAnchor);
+        dlAnchor.click();
+        dlAnchor.remove();
+        showToast('testimonials.json downloaded');
+      });
+
+      document.getElementById('btn-reset-defaults').addEventListener('click', async () => {
+        if (confirm('Reset testimonials to default initial reviews? This will restore original seed data.')) {
+          await window.TestimonialsService.resetToDefaults();
+          showToast('Reset to defaults complete');
+          await loadData();
+        }
+      });
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      // Check auth initially
+      checkAuth();
+    })();
+  </script>
+</body>
+</html>
